@@ -65,7 +65,8 @@ let overlays = {
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps, overlays, {
-    collapsed: false}
+    collapsed: false
+}
 
 ).addTo(map);
 
@@ -184,8 +185,8 @@ d3.json(earthquakeData).then(function (data) {
         }
     }).addTo(earthquakes);
 
-       // Create a legend control object.
-       let legend = L.control({
+    // Create a legend control object.
+    let legend = L.control({
         position: "bottomright"
     });
 
@@ -218,10 +219,19 @@ d3.json(earthquakeData).then(function (data) {
     // link to tectonic plates data
     // https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json
 
-// 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
-d3.json(https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json).then(() {
-    
-});
+    // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
+    d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function (tectonicData) {
+
+        // pass geoJSOn data
+        L.geoJSON(tectonicData, {
+            color: "purple",
+            weight: 2.5,
+        }).addTo(tectonicPlates);
+
+        // add tectonic group variable to map
+        tectonicPlates.addTo(map)
+
+    });
 
 
 
