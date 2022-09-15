@@ -37,7 +37,7 @@ let baseMaps = {
     Street: streets,
     Dark: dark,
     Satellite: satelliteStreets,
-  };
+};
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
@@ -46,33 +46,36 @@ let map = L.map('mapid', {
     layers: [streets]
 });
 
-//  Add a marker to the map for Los Angeles, California.
-let marker = L.circleMarker([34.0522, -118.2437]).addTo(map);
+// Pass our map layers into our layers control and add the layers control to the map.
+L.control.layers(baseMaps).addTo(map);
 
-// Add GeoJSON data.
-let sanFranAirport =
-{
-    "type": "FeatureCollection", "features": [{
-        "type": "Feature",
-        "properties": {
-            "id": "3469",
-            "name": "San Francisco International Airport",
-            "city": "San Francisco",
-            "country": "United States",
-            "faa": "SFO",
-            "icao": "KSFO",
-            "alt": "13",
-            "tz-offset": "-8",
-            "dst": "A",
-            "tz": "America/Los_Angeles"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [-122.375, 37.61899948120117]
-        }
-    }
-    ]
-};
+// //  Add a marker to the map for Los Angeles, California.
+// let marker = L.circleMarker([34.0522, -118.2437]).addTo(map);
+
+// // Add GeoJSON data.
+// let sanFranAirport =
+// {
+//     "type": "FeatureCollection", "features": [{
+//         "type": "Feature",
+//         "properties": {
+//             "id": "3469",
+//             "name": "San Francisco International Airport",
+//             "city": "San Francisco",
+//             "country": "United States",
+//             "faa": "SFO",
+//             "icao": "KSFO",
+//             "alt": "13",
+//             "tz-offset": "-8",
+//             "dst": "A",
+//             "tz": "America/Los_Angeles"
+//         },
+//         "geometry": {
+//             "type": "Point",
+//             "coordinates": [-122.375, 37.61899948120117]
+//         }
+//     }
+//     ]
+// };
 
 // // Grabbing our GeoJSON data.
 // L.geoJSON(sanFranAirport, {
@@ -82,19 +85,19 @@ let sanFranAirport =
 //     }
 // }).addTo(map);
 
-L.geoJSON(sanFranAirport, {
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup("<h2>" + feature.properties.city + "</h2>" + feature.properties.faa);
-    }
-}).addTo(map);
+// L.geoJSON(sanFranAirport, {
+//     onEachFeature: function (feature, layer) {
+//         layer.bindPopup("<h2>" + feature.properties.city + "</h2>" + feature.properties.faa);
+//     }
+// }).addTo(map);
 
-// link and grabbing geojson data
+// link and grabbing earthquake data
 
-let airportData = "https://raw.githubusercontent.com/alorenz465446/Mapping_Earthquakes/main/static/data/majorAirports.json";
+let earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 
-    d3.json(airportData).then(function (data) {
-        console.log(data);
-        // Creating a GeoJSON layer with the retrieved data.
-        L.geoJSON(data).addTo(map);
-    });
+d3.json(earthquakeData).then(function(data) {
+    console.log(data);
+    // Creating a GeoJSON layer with the retrieved data.
+    L.geoJSON(data).addTo(map);
+});
