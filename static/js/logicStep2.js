@@ -92,12 +92,20 @@ L.control.layers(baseMaps).addTo(map);
 // }).addTo(map);
 
 // link and grabbing earthquake data
-
+// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
 let earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 
-d3.json(earthquakeData).then(function(data) {
+d3.json(earthquakeData).then(function (data) {
     console.log(data);
     // Creating a GeoJSON layer with the retrieved data.
-    L.geoJSON(data).addTo(map);
+    L.geoJSON(data, {
+
+        // We turn each feature into a circleMarker on the map.
+
+        pointToLayer: function (feature, latlng) {
+            console.log(data);
+            return L.circleMarker(latlng);
+        },
+    }).addTo(map);
 });
