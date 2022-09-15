@@ -43,7 +43,7 @@ let baseMaps = {
 let earthquakes = new L.layerGroup();
 
 //  add 2nd layer (D1)
-let allEarthquakes = new L.LayerGroup();
+let tectonicPlates = new L.LayerGroup();
 
 
 // Create the map object with center, zoom level and default layer.
@@ -58,7 +58,8 @@ let map = L.map('mapid', {
 // We define an object that contains the overlays.
 // This overlay will be visible all the time.
 let overlays = {
-    Earthquakes: earthquakes
+    Earthquakes: earthquakes,
+    "Tectonic Plates": tectonicPlates,
 };
 
 
@@ -213,6 +214,16 @@ d3.json(earthquakeData).then(function (data) {
     };
 
     legend.addTo(map);
+
+    // link to tectonic plates data
+    // https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json
+
+// 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
+d3.json(https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json).then(() {
+    
+});
+
+
 
 
     // no data beyond this point
