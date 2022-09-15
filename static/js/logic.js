@@ -44,10 +44,16 @@ let sanFranAirport =
     ]
 };
 
-// Grabbing our GeoJSON data.
+// // Grabbing our GeoJSON data.
+// L.geoJSON(sanFranAirport, {
+//     pointToLayer: function(feature, latlng) {
+//         return L.circleMarker(latlng)
+//         .bindPopup("<h2>" + feature.properties.city + "</h2>");
+//     }
+// }).addTo(map);
+
 L.geoJSON(sanFranAirport, {
-    pointToLayer: function(feature, latlng) {
-        return L.circleMarker(latlng)
-        .bindPopup("<h2>" + feature.properties.city + "</h2>");
-    }
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("<h2>" + feature.properties.city + "</h2>" + feature.properties.faa);
+     }
 }).addTo(map);
