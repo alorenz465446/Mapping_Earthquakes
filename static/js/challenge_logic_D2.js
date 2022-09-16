@@ -188,7 +188,7 @@ d3.json(earthquakeData).then(function (data) {
         }
     }).addTo(earthquakes);
 
-    // calling major earthquaole data
+    // calling major earthquake data
 
     d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson").then(function (majorData) {
 
@@ -207,15 +207,19 @@ d3.json(earthquakeData).then(function (data) {
 
         // 5. Change the color function to use three colors for the major earthquakes based on the magnitude of the earthquake.
         function getColor(magnitude) {
-            if (magnitude > 6) {
+            if (magnitude >= 6.5) {
+                return "#a10a0a";
+            }
+            if (magnitude >= 5.5) {
                 return "#ea2c2c";
             }
-            if (magnitude > 5) {
-                return "#ea822c";
+            // if (magnitude > 5) {
+            //     return "#ea2c2c"; 
+            // }
+            if (magnitude >= 4.5) {
+                return "#c75b02";
             }
-            if (magnitude < 5) {
-                return "#ee9c00";
-            }
+    
 
         }
 
@@ -232,9 +236,23 @@ d3.json(earthquakeData).then(function (data) {
         //  after the marker has been created and styled.
         L.geoJson(majorData, {
 
-        });
-        // 8. Add the major earthquakes layer to the map.
+            pointToLayer: function (feature, latlng) {
+                console.log(majorData);
+                return L.circleMarker(latlng);
+            },
+            // We set the style for each circleMarker using our styleInfo function.
+            style: styleInfo,
+            // We create a popup for each circleMarker to display the magnitude and
+            //  location of the earthquake after the marker has been created and styled.
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+            }
 
+
+
+
+            // 8. Add the major earthquakes layer to the map.
+        }).addTo(majorEarthquakes);
         // 9. Close the braces and parentheses for the major earthquake data.
     });
 
