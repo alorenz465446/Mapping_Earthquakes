@@ -3,11 +3,17 @@ Earthquake analysis with JS and APIs
 
 ## Overview
 
-Basil and Sadhana like how you created your earthquake map with two different maps and the earthquake overlay. Now, Basil and Sadhana would like to see the earthquake data in relation to the tectonic plates’ location on the earth, and they would like to see all the earthquakes with a magnitude greater than 4.5 on the map, and they would like to see the data on a third map.
+Creating an earthquake map with three different maps and overlaying earthquake data from the past seven days. Relating the data to the tectonic plates’ location on the earth and displaying the earthquakes with a magnitude greater than 4.5 on the map by color coordinating the circle markers.
 
 
 ## Results
 
-## Summary
+Webpage Home
+<img width="955" alt="Earthquake_website" src="https://user-images.githubusercontent.com/107652317/190829861-4719dce0-0544-4f21-8f35-cce8ecdd4827.PNG">
+
+
 
 ## Resources
+* VS code
+* JS
+* Mapbox 
